@@ -1,11 +1,20 @@
 "use client";
 
-export default function Home() {
+export default function Layout() {
   return (
-    <div>
-      <main>
-        <h1 className="flex font-bold text-blue-600">yellow</h1>
-      </main>
-    </div>
+    <main className="bg-base-200 h-full w-full p-6">
+      <div className="card bg-base-100 w-96 shadow-sm">
+        <div className="card-body">
+          <h2 className="card-title">Card Title</h2>
+          <p>
+            A card component has a figure, a body part, and inside body there
+            are title and actions parts
+          </p>
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
