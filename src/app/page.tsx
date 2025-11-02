@@ -1,11 +1,10 @@
-"use client";
-
 import { IconChecks, IconNote, IconQuestionMark } from "@tabler/icons-react";
 
 import { Card, CardBody, CardTitle } from "@/app/components/ui/card";
 import { Timeline } from "@/app/components/ui/timeline";
+import { api } from "@/trpc/server";
 
-export default function Layout() {
+export default async function Layout() {
   const mockEvents = [
     {
       user: "Sashko",
@@ -21,8 +20,11 @@ export default function Layout() {
     },
   ];
 
+  const manol = await api.note.getRescent({ initiativeId: "12" });
+
   return (
     <main className="bg-base-200 grid h-full w-full grid-cols-3 gap-6 p-6">
+      <h1>{manol.ihu}</h1>
       <Card className="row-span-3">
         <CardBody>
           <CardTitle>Recent Activity</CardTitle>
