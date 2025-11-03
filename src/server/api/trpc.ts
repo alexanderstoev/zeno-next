@@ -19,7 +19,7 @@ import { db } from "@/server/db";
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   //   const session = await auth();
-  // TODO Add auth and db to the trpc context
+  // TODO Add auth to the trpc context
   return {
     db,
     // session,
