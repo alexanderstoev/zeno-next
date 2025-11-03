@@ -2,6 +2,7 @@ import { IconChecks, IconNote, IconQuestionMark } from "@tabler/icons-react";
 
 import { Card, CardBody, CardTitle } from "@/app/components/ui/card";
 import { Timeline } from "@/app/components/ui/timeline";
+import { api } from "@/trpc/server";
 
 export default async function Layout() {
   const mockEvents = [
@@ -19,21 +20,14 @@ export default async function Layout() {
     },
   ];
 
+  const notes = await api.note.getRescent({ initiativeId: "asd" });
+
   return (
     <main className="bg-base-200 grid h-full w-full grid-cols-1 gap-6 p-6 md:grid-cols-3">
       <Card className="md:col-span-3">
         <CardBody>
-          <CardTitle>Test Fonts</CardTitle>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam hic voluptates saepe
-            atque itaque. Pariatur ullam, quod reprehenderit, repellat autem ducimus sint laudantium
-            aspernatur maiores vero facere officia quae eligendi.Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Totam hic voluptates saepe atque itaque. Pariatur ullam,
-            quod reprehenderit, repellat autem ducimus sint laudantium aspernatur maiores vero
-            facere officia quae eligendi.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Totam hic voluptates saepe atque itaque. Pariatur ullam, quod reprehenderit, repellat
-            autem ducimus sint laudantium aspernatur maiores vero facere officia quae eligendi.
-          </p>
+          <CardTitle>{notes[0]?.title}</CardTitle>
+          <p>{notes[0].content}</p>
         </CardBody>
       </Card>
       <Card className="md:row-span-3">
