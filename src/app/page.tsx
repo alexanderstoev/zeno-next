@@ -2,7 +2,6 @@ import { IconChecks, IconNote, IconQuestionMark } from "@tabler/icons-react";
 
 import { Card, CardBody, CardTitle } from "@/app/components/ui/card";
 import { Timeline } from "@/app/components/ui/timeline";
-import { api } from "@/trpc/server";
 
 export default async function Layout() {
   const mockEvents = [
@@ -20,19 +19,31 @@ export default async function Layout() {
     },
   ];
 
-  const manol = await api.note.getRescent({ initiativeId: "12" });
-
   return (
-    <main className="bg-base-200 grid h-full w-full grid-cols-3 gap-6 p-6">
-      <h1>{manol.ihu}</h1>
-      <Card className="row-span-3">
+    <main className="bg-base-200 grid h-full w-full grid-cols-1 gap-6 p-6 md:grid-cols-3">
+      <Card className="md:col-span-3">
+        <CardBody>
+          <CardTitle>Test Fonts</CardTitle>
+          <p className="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam hic voluptates saepe
+            atque itaque. Pariatur ullam, quod reprehenderit, repellat autem ducimus sint laudantium
+            aspernatur maiores vero facere officia quae eligendi.Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Totam hic voluptates saepe atque itaque. Pariatur ullam,
+            quod reprehenderit, repellat autem ducimus sint laudantium aspernatur maiores vero
+            facere officia quae eligendi.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Totam hic voluptates saepe atque itaque. Pariatur ullam, quod reprehenderit, repellat
+            autem ducimus sint laudantium aspernatur maiores vero facere officia quae eligendi.
+          </p>
+        </CardBody>
+      </Card>
+      <Card className="md:row-span-3">
         <CardBody>
           <CardTitle>Recent Activity</CardTitle>
           <Timeline events={mockEvents} />
         </CardBody>
       </Card>
 
-      <Card className="col-span-2">
+      <Card className="md:col-span-2">
         <CardBody>
           <CardTitle>Stats</CardTitle>
           <div className="stats bg-base-200 shadow">
