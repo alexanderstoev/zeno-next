@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
-import { AppHeader } from "@/app/components/app/header";
-import { AppSidebar } from "@/app/components/app/sidebar";
+import { AppHeader } from "@/components/app/header";
+import { AppSidebar } from "@/components/app/sidebar";
+
 import Providers from "@/app/providers";
 
 import "./globals.css";

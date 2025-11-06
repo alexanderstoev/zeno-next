@@ -1,7 +1,8 @@
 import { IconChecks, IconNote, IconQuestionMark } from "@tabler/icons-react";
 
-import { Card, CardBody, CardTitle } from "@/app/components/ui/card";
-import { Timeline } from "@/app/components/ui/timeline";
+import { Card, CardBody, CardTitle } from "@/components/ui/card";
+import { Timeline } from "@/components/ui/timeline";
+
 import { api } from "@/trpc/server";
 
 export default async function Layout() {
