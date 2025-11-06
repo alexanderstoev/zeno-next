@@ -23,18 +23,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en" data-theme="dracula" className="dark">
       <body
-        className={`${InterFont.className} grid h-screen w-screen grid-cols-[auto_1fr] subpixel-antialiased`}
+        className={`${InterFont.className} grid h-screen w-screen grid-cols-[auto_1fr] grid-rows-[auto_1fr] subpixel-antialiased`}
       >
         <Providers>
-          <aside className="h-full">
-            <AppSidebar />
-          </aside>
-          <div className="grid grid-rows-[auto_1fr]">
-            <header>
-              <AppHeader />
-            </header>
-            <main>{children}</main>
-          </div>
+          <AppSidebar />
+          <AppHeader />
+          <main className="bg-base-200 h-full w-full grow p-6">{children}</main>
         </Providers>
       </body>
     </html>

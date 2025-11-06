@@ -37,7 +37,7 @@ const menuItems: AppSidebarItem[] = [
 export const AppSidebar = () => {
   const { sidebarCollapsed, toggleSidebar } = useUI();
   return (
-    <div className="drawer lg:drawer-open">
+    <aside className="drawer lg:drawer-open row-span-2">
       <input
         id="app-sidebar"
         type="checkbox"
@@ -89,6 +89,6 @@ export const AppSidebar = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };

@@ -7,7 +7,7 @@ import { useUI } from "@/app/providers/ui";
 export const AppHeader = () => {
   const { toggleSidebar } = useUI();
   return (
-    <div className="navbar bg-base-100 flex justify-between gap-4 shadow-sm">
+    <header className="navbar bg-base-100 flex h-12 justify-between gap-4 shadow-sm">
       <div className="">
         <button className="btn btn-square" onClick={() => toggleSidebar()}>
           <IconMenu2 />
@@ -22,6 +22,6 @@ export const AppHeader = () => {
       <div className="">
         <IconUser />
       </div>
-    </div>
+    </header>
   );
 };
