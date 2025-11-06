@@ -5,7 +5,7 @@ import { Timeline } from "@/components/ui/timeline";
 
 import { api } from "@/trpc/server";
 
-export default async function Layout() {
+export default async function DashboardPage() {
   const mockEvents = [
     {
       user: "Sashko",

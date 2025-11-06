@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
-import Providers from "@/app/providers";
+import { AppHeader } from "@/components/app/header";
+import { AppSidebar } from "@/components/app/sidebar";
 
-import "./globals.css";
+import Providers from "@/app/providers";
 
 const InterFont = Inter({
   variable: "--font-inter",
@@ -16,11 +17,15 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function AppLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" data-theme="dracula" className="dark">
-      <body className={`${InterFont.className} grid h-screen w-screen subpixel-antialiased`}>
+      <body
+        className={`${InterFont.className} grid h-screen w-screen grid-cols-[auto_1fr] grid-rows-[auto_1fr] subpixel-antialiased`}
+      >
         <Providers>
+          <AppSidebar />
+          <AppHeader />
           <main className="bg-base-200 h-full w-full grow p-6">{children}</main>
         </Providers>
       </body>
