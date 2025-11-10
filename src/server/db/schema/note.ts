@@ -1,4 +1,4 @@
-import { type InferSelectModel, sql } from "drizzle-orm";
+import { type InferSelectModel } from "drizzle-orm";
 import { index } from "drizzle-orm/pg-core";
 import z from "zod";
 
@@ -15,10 +15,7 @@ export const notes = createTable(
     content: d.text("content"),
     pinned: d.boolean("pinned").default(false),
 
-    createdAt: d
-      .timestamp()
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
+    createdAt: d.timestamp().defaultNow().notNull(),
     updatedAt: d.timestamp().$onUpdate(() => new Date()),
   }),
   (d) => [

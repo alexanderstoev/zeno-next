@@ -1,11 +1,26 @@
 "use client";
 
 import { IconMenu2, IconSearch, IconUser } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
-import { useUI } from "@/app/providers/ui";
+import { authClient } from "@/server/auth/client";
+
+import { useUI } from "@/components/providers/ui";
 
 export const AppHeader = () => {
   const { toggleSidebar } = useUI();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+        },
+      },
+    });
+  };
+
   return (
     <header className="navbar flex h-12 justify-between gap-4 shadow-sm">
       <div className="">
@@ -20,7 +35,9 @@ export const AppHeader = () => {
         </label>
       </div>
       <div className="">
-        <IconUser />
+        <button className="btn btn-square" onClick={() => handleSignOut()}>
+          <IconUser />
+        </button>
       </div>
     </header>
   );

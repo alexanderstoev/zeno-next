@@ -11,7 +11,7 @@ import {
   ReactNode,
 } from "@tabler/icons-react";
 
-import { useUI } from "@/app/providers/ui";
+import { useUI } from "@/components/providers/ui";
 
 export type AppSidebarItem =
   | {

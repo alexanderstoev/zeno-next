@@ -1,5 +1,6 @@
 import { IconBoltFilled } from "@tabler/icons-react";
 
+import { Signin } from "@/components/app/login";
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
 
 export default async function LandingPage() {
@@ -23,9 +24,7 @@ export default async function LandingPage() {
           for clarity. Built for productivity.
         </p>
         <div className="mt-6 flex space-x-4">
-          <a href="/register" className="btn btn-accent">
-            Get Started
-          </a>
+          <Signin />
           <a href="/dashboard" className="btn btn-soft">
             Dashboard
           </a>

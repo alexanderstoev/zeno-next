@@ -1,4 +1,8 @@
 import { IconChecks, IconNote, IconQuestionMark } from "@tabler/icons-react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
+import { auth } from "@/server/auth";
 
 import { Card, CardBody, CardTitle } from "@/components/ui/card";
 import { Timeline } from "@/components/ui/timeline";
@@ -6,6 +10,11 @@ import { Timeline } from "@/components/ui/timeline";
 import { api } from "@/trpc/server";
 
 export default async function DashboardPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) {
+    redirect("/");
+  }
+
   const mockEvents = [
     {
       user: "Sashko",
@@ -27,8 +36,14 @@ export default async function DashboardPage() {
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       <Card className="md:col-span-3">
         <CardBody>
-          <CardTitle>{notes[0]?.title}</CardTitle>
-          <p>{notes[0].content}</p>
+          <p>Session: {session?.user.email}</p>
+          {notes.length > 0 && (
+            <>
+              <CardTitle>{notes[0]?.title}</CardTitle>
+              <p>{notes[0].content}</p>
+            </>
+          )}
+          {notes.length === 0 && <p>No notes yet</p>}
         </CardBody>
       </Card>
       <Card className="md:row-span-3">
