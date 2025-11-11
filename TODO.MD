@@ -2,11 +2,11 @@
 
 ## Authentication
 
-- [  ] Integrate Better Auth
-- [ ] Configure OAuth providers (Google, GitHub, etc.)
-- [ ] Set up protected routes + session handling
-- [ ] Redirect flow: guest → login → dashboard
-- [ ] Secure session handling (httpOnly cookies, CSRF, sameSite, etc.)
+- [x] Integrate Better Auth
+- [x] Configure OAuth providers (Google, GitHub, etc.)
+- [x] Set up protected routes + session handling
+- [x] Redirect flow: guest → login → dashboard
+- [x] Secure session handling (httpOnly cookies, CSRF, sameSite, etc.)
 
 ## Database Setup
 
