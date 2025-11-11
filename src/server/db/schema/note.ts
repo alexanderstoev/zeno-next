@@ -37,7 +37,7 @@ export const insertNoteSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters").max(255, "Title too long"),
   content: z.string().max(2000, "Description too long").optional().nullable(),
   pinned: z.number().optional(),
-  initiativeId: z.string().uuid(),
+  initiativeId: z.uuid(),
 });
 
 export const updateNoteSchema = insertNoteSchema.extend({
