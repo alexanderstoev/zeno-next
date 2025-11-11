@@ -1,4 +1,4 @@
-import { pgTableCreator, uuid } from "drizzle-orm/pg-core";
+import { pgTableCreator, timestamp, uuid } from "drizzle-orm/pg-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -23,3 +23,13 @@ export const idColumn = () =>
  * Not null, 36 chars.
  */
 export const fkColumn = (columnName: string) => uuid(columnName).notNull();
+
+export const defaultColumns = () => {
+  return {
+    id: idColumn(),
+    createdAt: timestamp().defaultNow().notNull(),
+    updatedAt: timestamp()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  };
+};

@@ -2,21 +2,18 @@ import { type InferSelectModel } from "drizzle-orm";
 import { index } from "drizzle-orm/pg-core";
 import z from "zod";
 
-import { createTable, idColumn } from "@/server/db/helpers";
+import { createTable, defaultColumns } from "@/server/db/helpers";
 
 export const notes = createTable(
   "note",
   (d) => ({
-    id: idColumn(),
+    ...defaultColumns(),
     // createdBy: fkColumn("created_by"),
     // initiativeId: fkColumn("initiative_id"),
 
     title: d.text("title").notNull(),
     content: d.text("content"),
     pinned: d.boolean("pinned").default(false),
-
-    createdAt: d.timestamp().defaultNow().notNull(),
-    updatedAt: d.timestamp().$onUpdate(() => new Date()),
   }),
   (d) => [
     // index("note_created_by_idx").on(d.createdBy),

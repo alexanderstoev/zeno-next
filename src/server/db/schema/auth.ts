@@ -1,40 +1,32 @@
-import { boolean, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
-import { createTable } from "@/server/db/helpers";
+import { createTable, defaultColumns, idColumn } from "@/server/db/helpers";
 
 export const user = createTable("user", {
-  id: text("id").primaryKey(),
+  ...defaultColumns(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
 });
 
 export const session = createTable("session", {
-  id: text("id").primaryKey(),
+  ...defaultColumns(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
-  userId: text("user_id")
+  userId: uuid("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
+  activeOrganizationId: uuid("active_organization_id"),
 });
 
 export const account = createTable("account", {
-  id: text("id").primaryKey(),
+  ...defaultColumns(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
-  userId: text("user_id")
+  userId: uuid("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   accessToken: text("access_token"),
@@ -44,20 +36,48 @@ export const account = createTable("account", {
   refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
   scope: text("scope"),
   password: text("password"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
 });
 
 export const verification = createTable("verification", {
-  id: text("id").primaryKey(),
+  ...defaultColumns(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
   expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
+});
+
+export const organization = createTable("organization", {
+  ...defaultColumns(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  isPersonal: boolean("is_personal"),
+  ownerId: uuid("owner_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+});
+
+export const member = createTable("member", {
+  ...defaultColumns(),
+  organizationId: uuid("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  role: text("role").default("member").notNull(),
+});
+
+export const invitation = createTable("invitation", {
+  id: idColumn(),
+  organizationId: uuid("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  role: text("role"),
+  status: text("status").default("pending").notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  inviterId: uuid("inviter_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
 });

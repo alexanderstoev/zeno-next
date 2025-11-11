@@ -2,18 +2,21 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 
+import { databaseHooks } from "@/server/auth/database-hooks";
+import { organizationPlugin } from "@/server/auth/organization-plugin";
+import { socialProviders } from "@/server/auth/providers";
 import { db } from "@/server/db";
 
-import { env } from "@/env";
-
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: "pg" }),
+  appName: "Zeno",
+  database: drizzleAdapter(db, { provider: "pg", transaction: true }),
   emailAndPassword: { enabled: false },
-  plugins: [nextCookies()],
-  socialProviders: {
-    discord: {
-      clientId: env.AUTH_DISCORD_ID,
-      clientSecret: env.AUTH_DISCORD_SECRET,
+  plugins: [nextCookies(), organizationPlugin],
+  advanced: {
+    database: {
+      generateId: () => crypto.randomUUID(),
     },
   },
+  databaseHooks: databaseHooks,
+  socialProviders: socialProviders,
 });
