@@ -10,6 +10,7 @@ import {
   IconQuestionMark,
   ReactNode,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 import { useUI } from "@/components/providers/ui";
 
@@ -17,7 +18,7 @@ export type AppSidebarItem =
   | {
       caption: string;
       icon: ReactNode;
-      href?: string;
+      href: string;
       separator?: false;
       count?: number;
     }
@@ -25,13 +26,13 @@ export type AppSidebarItem =
       separator: true;
     };
 const menuItems: AppSidebarItem[] = [
-  { caption: "Glimpses", icon: <IconBolt />, count: 5 },
-  { caption: "Initiatives", icon: <IconFolder /> },
+  { caption: "Glimpses", icon: <IconBolt />, count: 5, href: "/glimpses" },
+  { caption: "Initiatives", icon: <IconFolder />, href: "/initiatives" },
   { separator: true },
-  { caption: "Tasks", icon: <IconChecks />, count: 23 },
-  { caption: "Questions", icon: <IconQuestionMark /> },
-  { caption: "Notes", icon: <IconNote /> },
-  { caption: "Articles", icon: <IconNews /> },
+  { caption: "Tasks", icon: <IconChecks />, count: 23, href: "/tasks" },
+  { caption: "Questions", icon: <IconQuestionMark />, href: "/questions" },
+  { caption: "Notes", icon: <IconNote />, href: "/notes" },
+  { caption: "Articles", icon: <IconNews />, href: "/articles" },
 ];
 
 export const AppSidebar = () => {
@@ -57,8 +58,12 @@ export const AppSidebar = () => {
           <ul className="menu w-full grow">
             <li className="mb-4">
               <button className="text-accent flex h-12 items-center text-2xl">
-                <IconBoltFilled />
-                {!sidebarCollapsed && <span>Zeno</span>}
+                {!sidebarCollapsed && (
+                  <>
+                    <IconBoltFilled />
+                    <span>Zeno</span>
+                  </>
+                )}
               </button>
             </li>
             {menuItems.map((item, index) =>
@@ -70,7 +75,7 @@ export const AppSidebar = () => {
                   className="tooltip tooltip-right text-base-content/80"
                   data-tip={sidebarCollapsed ? item.caption + " " + item.count : ""}
                 >
-                  <button>
+                  <Link href={item.href ?? ""}>
                     {item.icon}
                     {!sidebarCollapsed && (
                       <>
@@ -82,7 +87,7 @@ export const AppSidebar = () => {
                         )}
                       </>
                     )}
-                  </button>
+                  </Link>
                 </li>
               )
             )}
