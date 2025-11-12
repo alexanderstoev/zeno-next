@@ -12,14 +12,20 @@
 
 - [ ] Define initial DB schema (Drizzle + PostgreSQL)
 - [ ] Implement core entities:
-  - [ ] Glimpses
-  - [ ] Initiatives
-  - [ ] Notes / Questions / Tasks (organized outputs of glimpses)
-  - [ ] Articles (finalized initiative output)
-  - [ ] Users & OAuth accounts
-- [ ] Add tenant or team support structure (if applicable later)
+- [ ] Glimpses
+- [ ] Initiatives
+- [ ] Notes / Questions / Tasks (organized outputs of glimpses)
+- [ ] Articles (finalized initiative output)
+- [x] Users & OAuth accounts
+- [x] Add tenant or team support structure
 
 ## Core App Flow
 
 - [ ] Always-visible “Capture Glimpse” input
 - [ ] Create dedicated **Zen Session** page for organizing glimpses
+
+## App State
+
+- [ ] Create a global app state (using Zustand or similar).
+- [ ] Store user information in the state.
+- [ ] Store the active initiative in the state.
