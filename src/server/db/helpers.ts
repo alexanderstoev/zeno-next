@@ -1,8 +1,5 @@
 import { pgTableCreator, timestamp, uuid } from "drizzle-orm/pg-core";
 
-import { db } from "@/server/db";
-import { TInsertActivityLog, activityLog } from "@/server/db/schema";
-
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
  * database instance for multiple projects.
@@ -36,29 +33,3 @@ export const defaultColumns = () => {
       .notNull(),
   };
 };
-
-export async function logActivity({
-  userId,
-  userName,
-  initiativeId,
-  initiativeName,
-  organizationId,
-  organizationName,
-  entity,
-  entityId,
-  action,
-  details,
-}: TInsertActivityLog) {
-  await db.insert(activityLog).values({
-    userId,
-    userName,
-    organizationId,
-    organizationName,
-    initiativeId,
-    initiativeName,
-    entity,
-    entityId,
-    action,
-    details,
-  });
-}
