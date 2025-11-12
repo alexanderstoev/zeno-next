@@ -1,6 +1,5 @@
 import { db } from "@/server/db";
-
-import { TInsertActivityLog, activityLog } from "./schema";
+import { TInsertActivityLog, activityLog } from "@/server/db/schema";
 
 export async function logActivity({
   userId,
