@@ -4,5 +4,16 @@
     "source.fixAll.eslint": true,
     "source.fixAll.ts": true,
     "source.organizeImports": true
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "preferences": {
+            "importModuleSpecifier": "non-relative"
+          }
+        }
+      }
+    }
   }
 }
