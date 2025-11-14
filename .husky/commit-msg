@@ -1,0 +1,6 @@
+echo "================================="
+echo "🔹 Running commitlint..."
+pnpm commitlint --edit "$1" || {
+  echo "❌ Commit message invalid (type: summary)"
+  exit 1
+}
